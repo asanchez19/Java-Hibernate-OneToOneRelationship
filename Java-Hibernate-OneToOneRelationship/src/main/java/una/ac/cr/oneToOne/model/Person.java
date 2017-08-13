@@ -37,6 +37,9 @@ public class Person {
         this.passport_detail_id = passport_detail_id;
     }
 
+    public Person() {
+    }
+
     public int getId() {
         return id;
     }
