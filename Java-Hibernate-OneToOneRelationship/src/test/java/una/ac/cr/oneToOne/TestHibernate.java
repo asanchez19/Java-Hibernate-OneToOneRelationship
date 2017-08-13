@@ -4,8 +4,14 @@
  * and open the template in the editor.
  */
 package una.ac.cr.oneToOne;
+import java.util.LinkedList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 import una.ac.cr.oneToOne.HibernateUtil;
@@ -54,8 +60,19 @@ public class TestHibernate {
 
     }
     @Test
-     public void testDelete() {
-         
+     public void testList() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        // begin a transaction 
+
+        Query query = session.createQuery("from Person ");
+	        List<?> list = query.list();
+	        List<Person> persons = (List<Person>)list;
+                for(int i = 0; i < persons.size();i++){
+                    System.out.println("Nombre: " + persons.get(i).getName());
+                    System.out.println("Pasaporte: " + persons.get(i).getPassport_detail_id().getPassportno());
+                }
+        
+
      }
-    
 }
